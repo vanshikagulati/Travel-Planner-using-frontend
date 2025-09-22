@@ -1,4 +1,3 @@
-# Travel-Planner-using-frontend
 # TravelEase - Complete Travel Planner
 
 A comprehensive travel planning website with all the features you need to organize your dream trip.
