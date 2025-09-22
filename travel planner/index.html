@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelEase - Complete Travel Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-plane"></i>
+                <h1>TravelEase</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#itinerary"><i class="fas fa-route"></i> Itinerary</a></li>
+                    <li><a href="#budget"><i class="fas fa-dollar-sign"></i> Budget</a></li>
+                    <li><a href="#packing"><i class="fas fa-suitcase"></i> Packing</a></li>
+                    <li><a href="#memories"><i class="fas fa-camera"></i> Memories</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Plan Your Dream Trip with Ease</h2>
+                <p>Create detailed itineraries, track your budget, organize packing lists, and preserve memories all in one place</p>
+                <button class="btn-primary" id="startPlanningBtn">Start Planning Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trip Creation Section -->
+    <section class="trip-creation" id="tripCreation">
+        <div class="container">
+            <h2>Create Your Dream Trip</h2>
+            <div class="creation-form">
+                <div class="form-section">
+                    <h3>Trip Details</h3>
+                    <div class="form-group">
+                        <label for="tripName">Trip Name</label>
+                        <input type="text" id="tripName" placeholder="e.g., Summer Europe Adventure">
+                    </div>
+                    <div class="form-group">
+                        <label for="destination">Destination(s)</label>
+                        <input type="text" id="destination" placeholder="Enter destinations separated by commas">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startDate">Start Date</label>
+                            <input type="date" id="startDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">End Date</label>
+                            <input type="date" id="endDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="travelers">Number of Travelers</label>
+                        <input type="number" id="travelers" min="1" value="1">
+                    </div>
+                    <div class="form-group" id="travelerNamesGroup">
+                        <label for="travelerNames">Traveler Names</label>
+                        <input type="text" id="travelerNames" placeholder="Enter names separated by commas">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn-secondary" id="generateItineraryBtn">Generate Itinerary</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Itinerary Section -->
+    <section class="itinerary-section" id="itinerary">
+        <div class="container">
+            <h2>Your Travel Itinerary</h2>
+            <div class="itinerary-controls">
+                <button class="btn-primary" id="addDayBtn">Add Day</button>
+                <button class="btn-secondary" id="saveItineraryBtn">Save Itinerary</button>
+                <div class="export-container">
+    <button class="btn-primary" id="exportPdfBtn">Export PDF</button>
+</div>
+
+            </div>
+            <div class="itinerary-days" id="itineraryDays">
+                <!-- Days will be dynamically generated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Budget Section -->
+    <section class="budget-section" id="budget">
+        <div class="container">
+            <h2>Budget Tracking</h2>
+            <div class="budget-container">
+                <div class="budget-setup">
+                    <h3>Set Your Budget</h3>
+                    <div class="form-group">
+                        <label for="totalBudget">Total Budget ($)</label>
+                        <input type="number" id="totalBudget" placeholder="Enter your total budget">
+                    </div>
+                    <button class="btn-primary" id="setBudgetBtn">Set Budget</button>
+                </div>
+
+                <div class="budget-summary">
+                    <h3>Budget Summary</h3>
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <h4>Total Budget</h4>
+                            <span id="summaryTotal">$0.00</span>
+                        </div>
+                        <div class="summary-card">
+                            <h4>Amount Spent</h4>
+                            <span id="summarySpent">$0.00</span>
+                        </div>
+                        <div class="summary-card">
+                            <h4>Remaining</h4>
+                            <span id="summaryRemaining">$0.00</span>
+                        </div>
+                        <div class="summary-card">
+                            <h4>Percentage Used</h4>
+                            <span id="summaryPercentage">0%</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="budgetProgress"></div>
+                    </div>
+                </div>
+
+                <div class="expense-tracker">
+                    <h3>Add Expense</h3>
+                    <div class="expense-form">
+                        <div class="form-group">
+                            <label for="expenseDate">Date</label>
+                            <input type="date" id="expenseDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseCategory">Category</label>
+                            <select id="expenseCategory">
+                                <option value="accommodation">Accommodation</option>
+                                <option value="transport">Transport</option>
+                                <option value="food">Food</option>
+                                <option value="activities">Activities</option>
+                                <option value="shopping">Shopping</option>
+                                <option value="miscellaneous">Miscellaneous</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseDescription">Description</label>
+                            <input type="text" id="expenseDescription" placeholder="Brief description">
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseAmount">Amount ($)</label>
+                            <input type="number" id="expenseAmount" placeholder="0.00" step="0.01">
+                        </div>
+                        <button class="btn-primary" id="addExpenseBtn">Add Expense</button>
+                    </div>
+
+                    <div class="expense-list-container">
+                        <h3>Expense History</h3>
+                        <div class="expense-list" id="expenseList">
+                            <!-- Expenses will be dynamically generated -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packing List Section -->
+    <section class="packing-section" id="packing">
+        <div class="container">
+            <h2>Packing List</h2>
+            <div class="packing-container">
+                <div class="packing-input">
+                    <h3>Add Items to Your Packing List</h3>
+                    <div class="form-group">
+                        <label for="itemCategory">Category</label>
+                        <select id="itemCategory">
+                            <option value="clothing">Clothing</option>
+                            <option value="toiletries">Toiletries</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="documents">Documents</option>
+                            <option value="medications">Medications</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemName">Item Name</label>
+                        <input type="text" id="itemName" placeholder="Enter item name">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemQuantity">Quantity</label>
+                        <input type="number" id="itemQuantity" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="itemPacked">
+                            <span class="checkmark"></span>
+                            Already packed?
+                        </label>
+                    </div>
+                    <button class="btn-primary" id="addItemBtn">Add Item</button>
+                </div>
+
+                <div class="packing-lists">
+                    <h3>Your Packing Lists</h3>
+                    <div class="category-tabs" id="categoryTabs">
+                        <!-- Category tabs will be dynamically generated -->
+                    </div>
+                    <div class="items-list" id="itemsList">
+                        <!-- Items will be dynamically generated -->
+                    </div>
+                    <div class="packing-progress">
+                        <h4>Packing Progress</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="packingProgress"></div>
+                        </div>
+                        <span id="packingPercentage">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memories Section -->
+    <section class="memories-section" id="memories">
+        <div class="container">
+            <h2>Travel Memories</h2>
+            <div class="memories-container">
+                <div class="memory-input">
+                    <h3>Add Daily Journal Entry</h3>
+                    <div class="form-group">
+                        <label for="memoryDate">Date</label>
+                        <input type="date" id="memoryDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="memoryTitle">Title</label>
+                        <input type="text" id="memoryTitle" placeholder="Title of your memory">
+                    </div>
+                    <div class="form-group">
+                        <label for="memoryContent">Your Story</label>
+                        <textarea id="memoryContent" placeholder="Write about your experiences today..." rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="memoryPhoto">Upload Photo (optional)</label>
+                        <input type="file" id="memoryPhoto" accept="image/*">
+                    </div>
+                    <button class="btn-primary" id="saveMemoryBtn">Save Memory</button>
+                </div>
+
+                <div class="memories-list">
+                    <h3>Your Travel Memories</h3>
+                    <div class="memories" id="memoriesList">
+                        <!-- Memories will be dynamically generated -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="trip-story" id="tripStory">
+                <h3>Your Trip Story</h3>
+                <div class="story-content" id="storyContent">
+                    <!-- Generated story will appear here -->
+                </div>
+                <button class="btn-secondary" id="generateStoryBtn">Generate Trip Story</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TravelEase</h3>
+                    <p>Your complete travel planning companion</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><a href="#itinerary">Itinerary Planner</a></li>
+                        <li><a href="#budget">Budget Tracker</a></li>
+                        <li><a href="#packing">Packing List</a></li>
+                        <li><a href="#memories">Travel Journal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 TravelEase. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
