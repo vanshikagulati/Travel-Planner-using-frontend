@@ -1192,3 +1192,18 @@ body.dark-mode .expense-category-badge {
         grid-column: 1;
     }
 }
+/* Add to your style.css */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: var(--hover-color);
+}
